@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.GeneratorType;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 
@@ -24,17 +25,30 @@ import org.hibernate.annotations.GeneratorType;
  */
 
 @Entity
-public class Customer {
+public class Customer implements UserDetails{
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
+    private String username;
     private String password;
     private String name;
     // one customer can have many orders
     @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,mappedBy = "customer")
     private Set<Orders> orders = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
+    private Set<Authority> authorities = new HashSet<>();
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
+    
+    
+    
     public Long getId() {
         return id;
     }
@@ -43,12 +57,12 @@ public class Customer {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUname() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUname(String email) {
+        this.username = email;
     }
 
     public String getPassword() {
@@ -77,7 +91,32 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", orders=" + orders + '}';
+        return "Customer{" + "id=" + id + ", email=" + username + ", password=" + password + ", name=" + name + ", orders=" + orders + '}';
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getUname();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
     
     

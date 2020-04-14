@@ -20,11 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
     
     
-    
-    
-    
-    
-    
     //===========================GET MAPPINGS=========================
     
     @RequestMapping("/")
@@ -50,14 +45,7 @@ public class LoginController {
     }
     
     
-    @PostMapping("/login")
-    public String login(@ModelAttribute Customer customer){
-        
-        System.out.println(customer);
-        
-        
-        return null;
-    }
+    
     
     
     
