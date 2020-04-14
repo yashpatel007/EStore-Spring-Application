@@ -57,13 +57,16 @@ public class Customer implements UserDetails{
         this.id = id;
     }
 
-    public String getUname() {
-        return username;
+    
+    public String getUname(){
+        return this.username;
     }
 
-    public void setUname(String email) {
-        this.username = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+
 
     public String getPassword() {
         return password;
@@ -89,14 +92,11 @@ public class Customer implements UserDetails{
         this.orders = orders;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" + "id=" + id + ", email=" + username + ", password=" + password + ", name=" + name + ", orders=" + orders + '}';
-    }
+    
 
-    @Override
+    
     public String getUsername() {
-        return this.getUname();
+        return this.username;
     }
 
     @Override
@@ -118,6 +118,12 @@ public class Customer implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+    
+    @Override
+    public String toString() {
+        return "Customer{" + "id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", orders=" + orders + ", authorities=" + authorities + '}';
+    }
+
     
     
     

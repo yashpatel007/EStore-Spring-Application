@@ -28,13 +28,15 @@ public class CustomerService {
     
     
     public Customer save(Customer customer){
-//        String encodedPassword = passwordEncoder.encode(customer.getPassword());
-//        customer.setPassword(encodedPassword);
-//        Authority authority = new Authority();
-//        authority.setAuthority("ROLE_USER");
-//        authority.setCustomer(customer);
-//        customer.getAuthorities().add(authority);
-       return  customerRepo.save(customer);
+        
+        System.out.println(customer);
+        String encodedPassword = passwordEncoder.encode(customer.getPassword());
+        customer.setPassword(encodedPassword);
+        Authority authority = new Authority();
+        authority.setAuthority("ROLE_USER");
+        authority.setCustomer(customer);
+        customer.getAuthorities().add(authority);
+       return customerRepo.save(customer);
     }
     
 }

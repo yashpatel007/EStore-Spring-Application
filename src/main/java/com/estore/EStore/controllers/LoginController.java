@@ -5,8 +5,12 @@
  */
 package com.estore.EStore.controllers;
 
+import com.estore.EStore.Repositories.CustomerRepository;
+import com.estore.EStore.Services.CustomerService;
 import com.estore.EStore.models.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,13 @@ public class LoginController {
     
     //===========================GET MAPPINGS=========================
     
+    
+    @Autowired
+    private CustomerService customerService;
+    
+    
+    
+    
     @RequestMapping("/")
     public String homePage(){
         // request to home page mapped to index.html
@@ -35,7 +46,9 @@ public class LoginController {
     
     
     @RequestMapping("/register")
-    public String registerPage(){
+    public String registerPage(ModelMap model){
+        //put an empty customer
+        model.put("customer", new Customer());
         return "register";
     }
     
@@ -45,7 +58,12 @@ public class LoginController {
     }
     
     
-    
+    @PostMapping("/register")
+    public String saveCustomer(@ModelAttribute Customer customer){
+        System.out.println("mapping==> "+customer);
+        customerService.save(customer);
+        return "redirect:/login";
+    }
     
     
     
