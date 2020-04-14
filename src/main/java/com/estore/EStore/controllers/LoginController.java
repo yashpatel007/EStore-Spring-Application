@@ -9,6 +9,7 @@ import com.estore.EStore.Repositories.CustomerRepository;
 import com.estore.EStore.Services.CustomerService;
 import com.estore.EStore.models.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,8 +35,10 @@ public class LoginController {
     
     
     @RequestMapping("/")
-    public String homePage(){
+    public String homePage(ModelMap model,@AuthenticationPrincipal Customer customer){
         // request to home page mapped to index.html
+        System.out.println(customer);
+        model.put("customer",customer);
         return "index";
     }
     

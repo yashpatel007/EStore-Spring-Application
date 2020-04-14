@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,7 +23,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Product {
     
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne
@@ -42,8 +44,6 @@ public class Product {
         this.orders = orders;
     }
     
-    
-
     public Long getId() {
         return id;
     }
@@ -88,6 +88,7 @@ public class Product {
     public String toString() {
         return "Product{" + "id=" + id + ", seller=" + seller + ", name=" + name + ", discription=" + discription + ", price=" + price + ", orders=" + orders + '}';
     }
+
     
     
        
