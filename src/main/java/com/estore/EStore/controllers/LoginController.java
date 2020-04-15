@@ -31,13 +31,10 @@ public class LoginController {
     @Autowired
     private CustomerService customerService;
     
-    
-    
-    
     @RequestMapping("/")
     public String homePage(ModelMap model,@AuthenticationPrincipal Customer customer){
         // request to home page mapped to index.html
-        System.out.println(customer);
+        //System.out.println(customer);
         model.put("customer",customer);
         return "index";
     }
@@ -63,13 +60,9 @@ public class LoginController {
     
     @PostMapping("/register")
     public String saveCustomer(@ModelAttribute Customer customer){
-        System.out.println("mapping==> "+customer);
+        //System.out.println("mapping==> "+customer);
         customerService.save(customer);
         return "redirect:/login";
     }
-    
-    
-    
-    
     
 }

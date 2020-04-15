@@ -22,40 +22,35 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 
 @Configuration
-@Order(2)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(1)
+public class WebSecurityConfigSeller extends WebSecurityConfigurerAdapter {
     
     
-    @Autowired
-    private UserDetailsService userDetailsService;
-   
-     @Bean
+    
+     
      public PasswordEncoder getPasswordEncoder(){
         return  new BCryptPasswordEncoder();
      }
      
      @Override
      protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-      auth.userDetailsService(userDetailsService)
-                .passwordEncoder(getPasswordEncoder());
-          
+                
+                auth.inMemoryAuthentication()
+                .passwordEncoder(getPasswordEncoder())
+                .withUser("ps@mail.com")
+                .password( getPasswordEncoder().encode("asdfasdf"))
+                .roles("SELLER");
       }
+     
       @Override
       protected void configure(HttpSecurity http) throws Exception {
-                    http  
-                    .authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/register").permitAll()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .anyRequest().hasRole("USER").and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/dashboard")
-                    .permitAll()
-                    .and()
-                    .logout().logoutUrl("/logout")
-                    .deleteCookies("JSESSIONID")
-                    .permitAll();  
+                    http
+                    .antMatcher("/seller/**")
+			.authorizeRequests().anyRequest().authenticated()
+			.and().formLogin().loginPage("/seller/login")
+                        .defaultSuccessUrl("/seller/dashboard")
+			.permitAll()
+			.and().logout().logoutUrl("/seller/logout").logoutSuccessUrl("/seller/login");  
     }
-    
+ 
 }
