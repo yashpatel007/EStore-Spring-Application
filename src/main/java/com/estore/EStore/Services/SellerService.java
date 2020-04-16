@@ -8,6 +8,7 @@ package com.estore.EStore.Services;
 import com.estore.EStore.Repositories.SellerRepository;
 import com.estore.EStore.models.Authority;
 import com.estore.EStore.models.Seller;
+import com.estore.EStore.models.SellerAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,14 +31,14 @@ public class SellerService {
     public Seller save(Seller seller){
         
         System.out.println(seller);
-//        String encodedPassword = passwordEncoder.encode(seller.getPassword());
-//        seller.setPassword(encodedPassword);
-//        Authority authority = new Authority();
-//        authority.setAuthority("ROLE_SELLER");
-//        authority.setCustomer(seller);
-//        seller.getAuthorities().add(authority);
-          //return sellerRepo.save(seller);
-          return null;
+        String encodedPassword = passwordEncoder.encode(seller.getPassword());
+        seller.setPassword(encodedPassword);
+        SellerAuthority authority = new SellerAuthority();
+        authority.setAuthority("ROLE_SELLER");
+        authority.setSeller(seller);
+        seller.getAuthorities().add(authority);
+        return sellerRepo.save(seller);
+          
     }
     
     

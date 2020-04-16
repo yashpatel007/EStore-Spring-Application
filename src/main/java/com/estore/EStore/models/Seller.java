@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -25,7 +26,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class Seller {
+public class Seller  {
     
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +38,19 @@ public class Seller {
     @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,mappedBy = "seller")
     private Set<Product> products = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "seller")
+    private Set<SellerAuthority> authorities = new HashSet<>();
+
+    public Set<SellerAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<SellerAuthority> authorities) {
+        this.authorities = authorities;
+    }
+    
+    
+    
     public Long getId() {
         return id;
     }
@@ -81,7 +95,27 @@ public class Seller {
     public String toString() {
         return "Seller{" + "id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", products=" + products + '}';
     }
-    
+
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;    
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;    
+//    }
+//    
     
     
 }

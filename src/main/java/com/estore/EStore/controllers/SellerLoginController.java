@@ -5,7 +5,15 @@
  */
 package com.estore.EStore.controllers;
 
+import com.estore.EStore.Services.SellerService;
+import com.estore.EStore.models.Customer;
+import com.estore.EStore.models.Seller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -15,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SellerLoginController {
-  
-    @RequestMapping("/seller")
+        
+        @Autowired
+        private SellerService sellerService;
+    
+    
+        @RequestMapping("/seller")
 	public String admin() {
-            System.out.println("there here");
 		return "redirect:seller/login";
 	}
 
@@ -28,8 +39,22 @@ public class SellerLoginController {
 	}
 
 	@RequestMapping("/seller/dashboard")
-	public String admindashboard() {
+	public String admindashboard(ModelMap model,@AuthenticationPrincipal Seller seller) {
+            model.put("seller", seller);
+            
 		return "seller/dashboard";
 	}
+        
+        @RequestMapping("/seller/register")
+        public String sellerRegister(ModelMap model){
+               model.put("seller",new Seller());
+               return "seller/register";
+        }
+        
+        @PostMapping("/seller/register")
+        public String saveCustomer(@ModelAttribute Seller seller){
+            sellerService.save(seller);
+            return "redirect:/seller/login";
+        }
  
 }

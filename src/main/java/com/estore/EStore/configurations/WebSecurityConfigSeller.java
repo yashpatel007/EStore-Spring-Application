@@ -26,7 +26,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfigSeller extends WebSecurityConfigurerAdapter {
     
     
-    
+    @Autowired
+    private UserDetailsService userDetailsService;
      
      public PasswordEncoder getPasswordEncoder(){
         return  new BCryptPasswordEncoder();
@@ -34,23 +35,34 @@ public class WebSecurityConfigSeller extends WebSecurityConfigurerAdapter {
      
      @Override
      protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-                
-                auth.inMemoryAuthentication()
-                .passwordEncoder(getPasswordEncoder())
-                .withUser("ps@mail.com")
-                .password( getPasswordEncoder().encode("asdfasdf"))
-                .roles("SELLER");
+            
+         auth.userDetailsService(userDetailsService)
+                .passwordEncoder(getPasswordEncoder());
+         
+         
+//                auth.inMemoryAuthentication()
+//                .passwordEncoder(getPasswordEncoder())
+//                .withUser("ps@mail.com")
+//                .password( getPasswordEncoder().encode("asdfasdf"))
+//                .roles("SELLER");
       }
      
       @Override
       protected void configure(HttpSecurity http) throws Exception {
-                    http
+                    http 
                     .antMatcher("/seller/**")
-			.authorizeRequests().anyRequest().authenticated()
+			.authorizeRequests().antMatchers("/seller/register").permitAll()
+                        .anyRequest().authenticated()
 			.and().formLogin().loginPage("/seller/login")
                         .defaultSuccessUrl("/seller/dashboard")
 			.permitAll()
-			.and().logout().logoutUrl("/seller/logout").logoutSuccessUrl("/seller/login");  
+			.and().logout().logoutUrl("/seller/logout").logoutSuccessUrl("/seller/login");
+                    
+                   
+
+                    
+                    
+                    
     }
  
 }

@@ -27,7 +27,6 @@ public class LoginController {
     
     //===========================GET MAPPINGS=========================
     
-    
     @Autowired
     private CustomerService customerService;
     
