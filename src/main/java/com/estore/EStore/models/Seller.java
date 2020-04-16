@@ -26,7 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
-public class Seller  {
+public class Seller  implements UserDetails{
     
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,26 +96,26 @@ public class Seller  {
         return "Seller{" + "id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", products=" + products + '}';
     }
 
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;    
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;    
-//    }
-//    
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;    
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;    
+    }
+    
     
     
 }

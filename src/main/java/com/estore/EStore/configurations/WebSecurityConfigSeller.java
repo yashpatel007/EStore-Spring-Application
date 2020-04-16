@@ -58,11 +58,6 @@ public class WebSecurityConfigSeller extends WebSecurityConfigurerAdapter {
 			.permitAll()
 			.and().logout().logoutUrl("/seller/logout").logoutSuccessUrl("/seller/login");
                     
-                   
-
-                    
-                    
-                    
     }
  
 }
