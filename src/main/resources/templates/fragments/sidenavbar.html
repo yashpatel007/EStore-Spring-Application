@@ -15,7 +15,23 @@ and open the template in the editor.
     </head>
     <body>
         <div th:fragment="sidenavbar">
-            
+            <script type="javascript" src="/js/sidenavbar.js"></script>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+                <link rel="stylesheet" href="/css/sidebar.css">
+                <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+                  <a href="#"><span><i class="material-icons">info</i><span class="icon-text">about</span></a><br>
+                  <a href="#"><i class="material-icons">spa</i><span class="icon-text"></span>services</a></span>
+                  </a><br>
+                  <a href="#"><i class="material-icons">monetization_on</i><span class="icon-text"></span>clients</span></a><br>
+                  <a href="#"><i class="material-icons">email</i><span class="icon-text"></span>contact<span></a>
+                </div>
+
+                <div id="main">
+                  <h2>Open/Collapse Sidebar on Hover</h2>
+                  <p>Hover over any part of the sidebar to open the it.</p>
+                  <p>To close the sidebar, move your mouse out of the sidebar.</p>
+                </div>
+                
             
         </div>
     </body>

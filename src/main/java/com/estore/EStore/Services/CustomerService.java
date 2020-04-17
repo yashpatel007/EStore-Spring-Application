@@ -5,8 +5,10 @@
  */
 package com.estore.EStore.Services;
 
+import com.estore.EStore.Repositories.CartRepository;
 import com.estore.EStore.Repositories.CustomerRepository;
 import com.estore.EStore.models.Authority;
+import com.estore.EStore.models.Cart;
 import com.estore.EStore.models.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +25,8 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepo;
     
+    @Autowired
+    private CartRepository cartRepo;
     
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -33,10 +37,14 @@ public class CustomerService {
         System.out.println(customer);
         String encodedPassword = passwordEncoder.encode(customer.getPassword());
         customer.setPassword(encodedPassword);
+        
+        //create empty cart for customers
+        
         Authority authority = new Authority();
+        customer.getAuthorities().add(authority);
         authority.setAuthority("ROLE_USER");
         authority.setCustomer(customer);
-        customer.getAuthorities().add(authority);
+        
        return customerRepo.save(customer);
     }
     

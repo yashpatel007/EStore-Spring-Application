@@ -35,7 +35,18 @@ public class Product {
     
     @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,mappedBy = "product")
     private Set<Orders> orders = new HashSet<>();
+    
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,mappedBy = "product")
+    private Set<Cart> carts = new HashSet<>();
 
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+    
     public Set<Orders> getOrders() {
         return orders;
     }

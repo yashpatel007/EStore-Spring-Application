@@ -70,7 +70,10 @@ and open the template in the editor.
             <li class="nav-item ml-auto">
               <a class="nav-link" href="#">Home Appliance</a>
             </li>
-            <li class="nav-item dropdown  ml-auto mr-auto">
+            
+          </ul>
+            <ul class="navbar-nav ml-auto mr-5">
+            <li class="nav-item dropdown">
               <a th:text="${customer.name}" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account 
               </a>
@@ -83,8 +86,9 @@ and open the template in the editor.
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/settings">Settings</a>
               </div>
-            </li>
-          </ul>        
+            </li>    
+                
+            </ul>
         </div>
       </nav> 
       
@@ -118,8 +122,11 @@ and open the template in the editor.
               <li class="nav-item">
               <a class="nav-link" href="#">Analysis</a>
             </li>
+              
+          </ul>        
             
-            <li class="nav-item dropdown  ml-auto mr-auto">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown  ml-auto mr-auto">
               <a th:text="${seller.name}" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account 
               </a>
@@ -133,7 +140,10 @@ and open the template in the editor.
                 <a class="dropdown-item" href="/settings">Settings</a>
               </div>
             </li>
-          </ul>        
+              <li class="nav-item">
+                 <a class="nav-link" href="/seller/createproduct">New Product</a>
+              </li> 
+          </ul>
         </div>
       </nav> 
       

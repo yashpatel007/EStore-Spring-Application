@@ -5,34 +5,44 @@
  */
 package com.estore.EStore.models;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.GeneratorType;
 
 /**
  *
  * @author Yash Patel
  */
 
-
 @Entity
-public class Orders {
-    
+public class Cart {
+  
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    private Long customer_id;
     
     @ManyToOne
-    private Product  product;
-    
-    @ManyToOne
-    private Customer customer;
-    
-    
-    private Integer quantity;
+    Product product;
 
+    public Long getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(Long customer_id) {
+        this.customer_id = customer_id;
+    }
+
+    
     public Long getId() {
         return id;
     }
@@ -40,7 +50,8 @@ public class Orders {
     public void setId(Long id) {
         this.id = id;
     }
-   
+
+  
     public Product getProduct() {
         return product;
     }
@@ -49,25 +60,6 @@ public class Orders {
         this.product = product;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Orders{" + "id=" + id + ", product=" + product + ", customer=" + customer + ", quantity=" + quantity + '}';
-    }
-
+    
+    
 }

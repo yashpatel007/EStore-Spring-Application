@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GeneratorType;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -38,7 +39,9 @@ public class Customer implements UserDetails{
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
     private Set<Authority> authorities = new HashSet<>();
-
+    
+    
+    
     public Set<Authority> getAuthorities() {
         return authorities;
     }

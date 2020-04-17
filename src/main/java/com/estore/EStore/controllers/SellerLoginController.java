@@ -38,12 +38,7 @@ public class SellerLoginController {
 		return "seller/login";
 	}
 
-	@RequestMapping("/seller/dashboard")
-	public String admindashboard(ModelMap model,@AuthenticationPrincipal Seller seller) {
-            model.put("seller", seller);
-            
-		return "seller/dashboard";
-	}
+	
         
         @RequestMapping("/seller/register")
         public String sellerRegister(ModelMap model){

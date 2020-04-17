@@ -5,7 +5,16 @@
  */
 package com.estore.EStore.controllers;
 
+import com.estore.EStore.Services.ProductService;
+import com.estore.EStore.models.Orders;
+import com.estore.EStore.models.Product;
+import com.estore.EStore.models.Seller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -15,5 +24,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SellerDashboardController {
+
+    @Autowired
+    private ProductService productService;
     
+    
+     @RequestMapping("/seller/createproduct")
+     private String createProduct(ModelMap model,@AuthenticationPrincipal Seller seller){
+         model.put("seller", seller);
+         model.put("product", new Product());
+         return "seller/createproduct";
+     }
+        
+     @PostMapping("/seller/createproduct")
+     private String svprod(@ModelAttribute Product product, @AuthenticationPrincipal Seller seller){
+         product.setSeller(seller);
+         productService.save(product);
+         return "redirect:createproduct";
+     }
+     
+     
+     @RequestMapping("/seller/dashboard")
+	public String admindashboard(ModelMap model,@AuthenticationPrincipal Seller seller) {
+            model.put("seller", seller);
+            return "seller/dashboard";
+	}
+     
+
 }
