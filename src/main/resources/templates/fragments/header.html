@@ -45,6 +45,8 @@ and open the template in the editor.
   </div>
       
       <div th:fragment="dashboardHeader">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a th:if="${customer != null}"  class="navbar-brand" href="/dashboard">EStore</a>
         <a th:if="${customer == null}"  class="navbar-brand" href="/dashboard">EStore</a>
@@ -73,6 +75,15 @@ and open the template in the editor.
             
           </ul>
             <ul class="navbar-nav ml-auto mr-5">
+                <li class="nav-item">
+                    
+                    <a href="/cart" class="nav-link ">
+                        <link rel="stylesheet" href="/css/cart.css">
+                        <i class="fa fa-shopping-cart fa_custom fa-2x"></i>
+                        <span class='badge badge-warning' id='lblCartCount' th:text="${cartcount}"> 1 </span>
+                    </a>
+                    
+                </li>
             <li class="nav-item dropdown">
               <a th:text="${customer.name}" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account 
@@ -81,7 +92,7 @@ and open the template in the editor.
                  <form id="logoutButton" action="/logout" method="post">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <a  class="dropdown-item" href="javascript:{}" onclick="document.getElementById('logoutButton').submit();">Logout</a>
-                    </form>
+                 </form>
                 <a class="dropdown-item" href="/dashboard/profile">My Profile</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/settings">Settings</a>

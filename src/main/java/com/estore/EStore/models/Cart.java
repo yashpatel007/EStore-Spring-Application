@@ -29,20 +29,37 @@ public class Cart {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Long customer_id;
+    @ManyToOne
+    private Customer customer;
     
     @ManyToOne
     Product product;
 
-    public Long getCustomer_id() {
-        return customer_id;
+    private Integer count;
+
+    public Integer getCount() {
+        return count;
     }
 
-    public void setCustomer_id(Long customer_id) {
-        this.customer_id = customer_id;
+    public void setCount(Integer count) {
+        this.count = count;
     }
+    
+    
+    
+    
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+   
 
     
+
     public Long getId() {
         return id;
     }

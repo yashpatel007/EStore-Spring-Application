@@ -6,6 +6,7 @@
 package com.estore.EStore.models;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -40,6 +41,8 @@ public class Customer implements UserDetails{
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
     private Set<Authority> authorities = new HashSet<>();
     
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
+    private Set<Cart> carts = new HashSet<>();
     
     
     public Set<Authority> getAuthorities() {

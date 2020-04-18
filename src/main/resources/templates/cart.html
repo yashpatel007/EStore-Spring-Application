@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeLeaf-extras-springsecutity5"
+      lang="en">
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+    </head>
+    <body>
+        <div th:replace="fragments/header :: dashboardHeader"></div>
+        
+            <div th:if="${cartcount == null}" class="container mt-5">
+                 <div class="row">
+                    <div  class="col" style="text-align: center;">
+                        <h2 >You do not have anything in your Cart</h2>
+                        <img src="/images/emptycart.png" alt="Smiley face" class="rounded mx-auto d-block"></img>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${cartcount != null}" class="container mt-5">
+                <div class="row">
+                    <div class="col-9">
+                        <h2 >Cart Content</h2> 
+                        <ul class="list-group list-group-flush">
+                            
+                            <div th:each=" item : ${cartitems}">
+                                <li class="list-group-item">
+                                <div class="card">
+                                    <div th:text="${item.product.name}" class="card-header">
+                                      Featured
+                                    </div>
+                                    <div class="card-body">
+                                      <p th:text="${item.product.discription}" class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                      <div class="form-inline">      
+                                        <p for="itemcount">Quantity</p>
+                                        <input class="form-control" id="itemcount" th:value="${item.count}" type="number" min="1">
+                                            <form class="ml-auto" action="/deletecartitem" method="post">
+                                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                             <input type="hidden" name="productId" th:value="${item.product.id}">
+                                             <input type="hidden" name="customerId" th:value="${customer.id}">
+                                                 <button type="submit" class="btn btn-danger">Delete</button>
+                                                 </form>
+                                      </div>
+
+                                    
+                                    </div>
+                                  </div>
+                                  </li>
+                                
+                            </div>
+                            <li class="list-group-item"></li>
+                          </ul>
+                    </div>
+                    <div class="col-3">
+                        <ul class="list-group list-group-flush">
+                            <div th:each=" item : ${cartitems}">
+                                <li class="list-group-item" th:text="|${item.product.name}   :$ ${item.product.price*item.count}|"></li>
+                            </div>
+                            
+                            <li class="list-group-item" th:text="|Total :$ ${cartSum}|"></li>
+                            
+                        </ul>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        
+    </body>
+</html>
