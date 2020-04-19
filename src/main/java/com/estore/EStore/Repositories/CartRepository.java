@@ -46,4 +46,18 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query(value = "Delete from cart where customer_id=:cid and product_id=:pid",nativeQuery = true)
     void deleteCartItem(Long cid, Long pid);
     
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value = "INSERT INTO orders (customer_id,product_id,quantity)"+
+            " SELECT c.customer_id,c.product_id,c.count FROM cart c where c.customer_id=:cid",
+            nativeQuery = true)
+    Integer savetoOrders(Long cid);
+    
+    
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value ="DELETE FROM cart where customer_id=:cid", 
+            nativeQuery = true)
+    Integer delteCartItems(Long cid);
+    
 }

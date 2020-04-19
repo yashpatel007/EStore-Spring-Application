@@ -93,11 +93,12 @@ and open the template in the editor.
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <a  class="dropdown-item" href="javascript:{}" onclick="document.getElementById('logoutButton').submit();">Logout</a>
                  </form>
+                <a class="dropdown-item" href="/orders">Orders</a>
                 <a class="dropdown-item" href="/dashboard/profile">My Profile</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/settings">Settings</a>
               </div>
-            </li>    
+            </li>
                 
             </ul>
         </div>
@@ -147,6 +148,7 @@ and open the template in the editor.
                         <a  class="dropdown-item" href="javascript:{}" onclick="document.getElementById('logoutButton').submit();">Logout</a>
                     </form>
                 <a class="dropdown-item" href="/dashboard/profile">My Profile</a>
+                
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/settings">Settings</a>
               </div>

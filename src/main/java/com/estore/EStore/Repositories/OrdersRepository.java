@@ -6,7 +6,9 @@
 package com.estore.EStore.Repositories;
 
 import com.estore.EStore.models.Orders;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,5 +17,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
+   
+    
+    @Query(value = "SELECT * FROM orders o WHERE o.customer_id=:cid",
+            nativeQuery = true)
+    public List<Orders> getMyOrders(Long cid);
+    
+    
     
 }

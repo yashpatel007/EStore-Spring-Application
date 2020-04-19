@@ -76,6 +76,18 @@ public class CartService {
     }
     
     
+    public void placeMyOrder(Long cid){
+    
+        // insert to orders
+        cartRepo.savetoOrders(cid);
+        
+        // delete from cart
+        cartRepo.delteCartItems(cid);
+        
+    
+    }
+    
+    
     
     
     
