@@ -16,6 +16,33 @@ and open the template in the editor.
         
         <link href="/css/sidebar.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+       <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+          $("#productname").keyup(function(){
+            $("#cardTitle").text($("#productname").val());
+          });
+          
+          $("#price").keyup(function(){
+            $("#cardPrice").text("Price: $"+$("#price").val());
+          });
+          
+          $("#details").keyup(function(){
+            $("#cardDescription").text($("#details").val());
+          });
+            $("#imageUrl").keyup(function(){
+            $("#cardImage").attr("src",$("#imageUrl").val());
+          });
+          
+          
+          
+        });
+        </script>
+            
+            
+            
+            
     </head>
     <body>
         <div th:replace="fragments/header :: sellerdashboardHeader"></div>
@@ -26,7 +53,7 @@ and open the template in the editor.
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <div class="form-group">
                           <label for="productname">Product Name</label>
-                          <input th:field="${product.name}"  type="text" class="form-control" id="productname" aria-describedby="productName" placeholder="Product Name">
+                          <input  th:field="${product.name}"  type="text" class="form-control" id="productname" aria-describedby="productName" placeholder="Product Name">
                         </div>
                         <div class="form-group">
                           <label for="price">Price</label>
@@ -36,8 +63,30 @@ and open the template in the editor.
                           <label for="details">Product Details</label>
                           <textarea th:field="${product.discription}" type="text" class="form-control" id="details" placeholder="Product Description"></textarea>
                         </div>
+                        <div class="form-group">
+                          <label for="category">Category</label>
+                          <select th:field="${product.categoryId}" type="text" class="form-control" id="category" placeholder="">
+           
+                               <option th:each=" category : ${categories}" th:text="${category.category}" th:value="${category.id}"></option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="imageUrl">ImageUrl</label>
+                          <input th:field="${product.imageUrl}" type="text" class="form-control" id="imageUrl" placeholder="Image Url Here">
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form> 
+                </div>
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                    <img id="cardImage" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title" id="cardTitle">Card title</h5>
+                      <h6 class="card-title" id="cardPrice">Price</h6>
+                      <p id="cardDescription" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@
  */
 package com.estore.EStore.controllers;
 
+import com.estore.EStore.Services.CategoriesService;
 import com.estore.EStore.Services.ProductService;
 import com.estore.EStore.models.Orders;
 import com.estore.EStore.models.Product;
@@ -28,17 +29,23 @@ public class SellerDashboardController {
     @Autowired
     private ProductService productService;
     
+    @Autowired
+    private CategoriesService categoriesService;
+    
     
      @RequestMapping("/seller/createproduct")
      private String createProduct(ModelMap model,@AuthenticationPrincipal Seller seller){
          model.put("seller", seller);
          model.put("product", new Product());
+         model.put("categories", categoriesService.getCategories());
+         
          return "seller/createproduct";
      }
         
      @PostMapping("/seller/createproduct")
      private String svprod(@ModelAttribute Product product, @AuthenticationPrincipal Seller seller){
          product.setSeller(seller);
+         
          productService.save(product);
          return "redirect:createproduct";
      }

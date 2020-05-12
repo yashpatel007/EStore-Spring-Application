@@ -32,27 +32,14 @@ public class CartService {
     private CartRepository cartRepo;
     
     
-    public Cart addtoCart(@AuthenticationPrincipal Customer customer, Long productId){
-        
-//        System.out.println("================================");
-//        // see if entry already exist
-//        System.out.println(cartRepo.getcartCount(customer.getId()));
-//        System.out.println("================================");
-//        
-//        System.out.println("================cartitems================");
-//        
-//        List<Cart> cartitems=cartRepo.getMyCartItems(customer.getId());
-//        for (Cart item: cartitems){
-//            System.out.println(item.getProduct().getName());
-//        }
-//        
-//        
-//        System.out.println("================================");
+    public Cart addtoCart(@AuthenticationPrincipal Customer customer, Long productId, Integer val){
         
         Long prodInCart = cartRepo.ifCustomerHaveProduct(customer.getId(), productId);
         if(prodInCart>0){
             // update count+1
-            cartRepo.updateCount(customer.getId(), productId);
+            
+            cartRepo.updateCount(customer.getId(), productId,val);
+            
         }else{
         
         Cart cart = new Cart();
@@ -67,6 +54,12 @@ public class CartService {
         }
         return null;
     }
+    
+    
+    
+    
+    
+    
     
     
     public void deleteFromCart(Long cid, Long pid){

@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -32,6 +33,9 @@ public class Product {
     private String name;
     private String discription;
     private Integer price;
+    private String imageUrl;
+    
+    private Long categoryId;
     
     @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,mappedBy = "product")
     private Set<Orders> orders = new HashSet<>();
@@ -39,6 +43,28 @@ public class Product {
     @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,mappedBy = "product")
     private Set<Cart> carts = new HashSet<>();
 
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    
+    
+    
+    
+    
     public Set<Cart> getCarts() {
         return carts;
     }

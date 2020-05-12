@@ -55,11 +55,12 @@ public class DashboardController {
         return "dashboard";
     }
     
+
+    
     
      @PostMapping("/tocart")
      private String tocart(@ModelAttribute(name="productId") Long productId, @AuthenticationPrincipal Customer customer){
-         
-         cartService.addtoCart(customer, productId);
+         cartService.addtoCart(customer, productId,1);
          return "redirect:dashboard";
      }
      

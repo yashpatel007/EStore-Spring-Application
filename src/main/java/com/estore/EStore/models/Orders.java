@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
  * @author Yash Patel
  */
 
-
 @Entity
 public class Orders {
     
@@ -32,7 +31,17 @@ public class Orders {
     
     
     private Integer quantity;
+    
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+   
     public Long getId() {
         return id;
     }

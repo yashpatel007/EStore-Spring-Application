@@ -19,18 +19,17 @@ and open the template in the editor.
         <div  class="container mt-5">
             <div  class="row">
                 <div th:each=" randProduct : ${randProducts}" class="col-4">
-                    <div class="card m-1">
+                    <div class="card m-1" style="width:20rem; height: auto;">
+                         <img th:src="${randProduct.imageUrl}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 th:text="${randProduct.name}" class="card-title">Card title</h5>
                           <p th:text="${randProduct.discription}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <p th:text="|Price: ${randProduct.price}|" class="card-text"></p>
+                          <p th:text="|Price: $${randProduct.price}|" class="card-text"></p>
                           <form  action="/tocart" method="post">
-                              <input type="hidden" name="productId" th:value="${randProduct.id}"  >
+                              <input type="hidden" name="productId" th:value="${randProduct.id}">    
                               <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                              <button type="submit"  class="btn btn-primary">Add to Cart</button>
-                              <a href="#" class="btn btn-primary">Buy Now</a>
-                          </form>
-                          
+                              <button type="submit"  class="btn btn-primary btn-block">Add to Cart</button>
+                          </form>     
                         </div>
                     </div>
                 </div>

@@ -34,8 +34,8 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     
     @Transactional 
     @Modifying(clearAutomatically = true)
-    @Query(value="Update cart c set c.count=c.count+1 where customer_id=:cid and product_id=:pid", nativeQuery = true )
-    void updateCount(Long cid, Long pid); 
+    @Query(value="Update cart c set c.count=c.count+:val where customer_id=:cid and product_id=:pid", nativeQuery = true )
+    void updateCount(Long cid, Long pid, Integer val); 
     
     @Query(value = "SELECT * FROM Cart c WHERE  c.customer_id=:cid", nativeQuery = true)
     List<Cart> getMyCartItems(Long cid);
